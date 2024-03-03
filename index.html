@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="caminho-para-o-seu-favicon" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque D0</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png" sizes="32x32" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <form id="meuFormulario" method="POST" enctype="multipart/form-data" style="display: none;">
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Enviar Arquivo" name="submit">
+        </form>
+        
+        
+        <h1>Busca de Produto</h1>
+        <input type="text" id="codigoProduto" placeholder="Digite o SKU do produto"><br>
+        <button onclick="buscarProduto()">Buscar por Código</button>
+        <button onclick="buscarPosicao()">Buscar por Posição</button>
+        <button onclick="buscarProdutoPorHU()">Buscar por HU</button>
+        <table id="resultado">
+            <tr>
+                <th>Código Produto</th>
+                <th>Data de Fabricação</th>
+                <th>Local</th>
+                <th>Informação HU</th>
+            </tr>
+        </table>
+    </div>
+<script>
+    let csvData;
+
+    async function carregarCsv() {
+        const response = await fetch('arquivo.csv');
+        const text = await response.text();
+        csvData = Papa.parse(text, { header: true }).data;
+    }
+
+    document.addEventListener('DOMContentLoaded', carregarCsv);
+
+    
+// Função para adicionar números de resultados à tabela
+function adicionarNumerosResultados() {
+        var resultadoTable = document.getElementById("resultado");
+        var rows = resultadoTable.getElementsByTagName("tr");
+        for (var i = 1; i < rows.length; i++) {
+            var cell = document.createElement("td");
+            cell.textContent = i;
+            rows[i].appendChild(cell);
+        }
+    }
+
+function buscarProduto() {
+    let codigoProduto = document.getElementById('codigoProduto').value;
+    let resultado = document.getElementById('resultado');
+    resultado.innerHTML = ''; // Limpa a tabela antes de adicionar novos resultados
+
+    adicionarNumerosResultados();
+
+    for (let i = 0; i < csvData.length; i++) {
+        if (csvData[i]['Codigo Produto'] == codigoProduto) {
+            let tr = document.createElement('tr');
+            let tdCodigoProduto = document.createElement('td');
+            let tdDataFabricacao = document.createElement('td');
+            let tdLocal = document.createElement('td');
+            let tdInformacaoHU = document.createElement('td');
+
+            tdCodigoProduto.textContent = csvData[i]['Codigo Produto'];
+            tdDataFabricacao.textContent = csvData[i]['Data de Fabricação'].substring(0, 10);
+            tdLocal.textContent = csvData[i]['Local'];
+            tdInformacaoHU.textContent = csvData[i]['Informacao HU'];
+
+            tr.appendChild(tdCodigoProduto);
+            tr.appendChild(tdDataFabricacao);
+            tr.appendChild(tdLocal);
+            tr.appendChild(tdInformacaoHU);
+
+            resultado.appendChild(tr);
+        }
+    }
+}
+
+
+function buscarPosicao() {
+    let codigoProduto = document.getElementById('codigoProduto').value;
+    let resultado = document.getElementById('resultado');
+    resultado.innerHTML = ''; // Limpa a tabela antes de adicionar novos resultados
+
+    adicionarNumerosResultados();
+
+    for (let i = 0; i < csvData.length; i++) {
+        if (csvData[i]['Local'] == codigoProduto) {
+            let tr = document.createElement('tr');
+            let tdCodigoProduto = document.createElement('td');
+            let tdDataFabricacao = document.createElement('td');
+            let tdLocal = document.createElement('td');
+            let tdInformacaoHU = document.createElement('td');
+
+            tdCodigoProduto.textContent = csvData[i]['Codigo Produto'];
+            tdDataFabricacao.textContent = csvData[i]['Data de Fabricação'].substring(0, 10);
+            tdLocal.textContent = csvData[i]['Local'];
+            tdInformacaoHU.textContent = csvData[i]['Informacao HU'];
+
+            tr.appendChild(tdCodigoProduto);
+            tr.appendChild(tdDataFabricacao);
+            tr.appendChild(tdLocal);
+            tr.appendChild(tdInformacaoHU);
+
+            resultado.appendChild(tr);
+        }
+    }
+}
+
+function buscarProdutoPorHU() {
+    let informacaoHU = document.getElementById('codigoProduto').value;
+    let resultado = document.getElementById('resultado');
+    resultado.innerHTML = ''; // Limpa a tabela antes de adicionar novos resultados
+
+    let informacaoHUEncontrada = false;
+
+    adicionarNumerosResultados();
+
+    for (let i = 0; i < csvData.length; i++) {
+        if (csvData[i]['Informacao HU'] == informacaoHU) {
+            informacaoHUEncontrada = true;
+            let tr = document.createElement('tr');
+            let tdCodigoProduto = document.createElement('td');
+            let tdDataFabricacao = document.createElement('td');
+            let tdLocal = document.createElement('td');
+            let tdInformacaoHU = document.createElement('td');
+
+            tdCodigoProduto.textContent = csvData[i]['Codigo Produto'];
+            tdDataFabricacao.textContent = csvData[i]['Data de Fabricação'].substring(0, 10);
+            tdLocal.textContent = csvData[i]['Local'];
+            tdInformacaoHU.textContent = csvData[i]['Informacao HU'];
+
+            tr.appendChild(tdCodigoProduto);
+            tr.appendChild(tdDataFabricacao);
+            tr.appendChild(tdLocal);
+            tr.appendChild(tdInformacaoHU);
+
+            resultado.appendChild(tr);
+        }
+    }
+
+    if (!informacaoHUEncontrada) {
+        let tr = document.createElement('tr');
+        let tdInformacaoHU = document.createElement('td');
+        tdInformacaoHU.textContent = 'Informação de HU não encontrada';
+        tdInformacaoHU.colSpan = 4; // Preenche todas as colunas
+        tr.appendChild(tdInformacaoHU);
+        resultado.appendChild(tr);
+    }
+}
+
+    document.addEventListener('DOMContentLoaded', carregarCsv);
+</script>
+
+</body>
+</html>

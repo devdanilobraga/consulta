@@ -1,0 +1,154 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.logo img {
+    max-width: 320px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translate(100%, 0);
+}
+
+.engrenagem{
+    position: absolute; /* Define a posição absoluta */
+    top: 0px; /* Distância do topo em pixels */
+    right: 2%; /* Distância da direita em pixels */
+}
+
+.engrenagem img {
+    width: 50px; /* Largura desejada para a imagem */
+    height: auto; /* Altura desejada para a imagem */
+    float: right; /* Alinha a imagem à direita */
+    margin-top: 10px; /* Ajusta a margem superior em pixels */
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #0B4619;
+}
+
+
+input[type="text"] {
+    width: 70vw;
+    padding: 8px;
+    margin-bottom: 1vw;
+    font-size: 21px;
+}
+
+button {
+    padding: 1vw 2vw;
+    background-color: #0B4619;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+button:hover {
+    background-color: #fcfefc;
+    color: #0A3F17;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 1vw;
+}
+
+th {
+    background-color: #0B4619;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+@media screen and (max-width: 600px) {
+ html{
+    max-width: 100%;
+ }
+   
+
+ .logo img {
+    max-width: 320px;
+    height: 100px;
+    margin-left: -25%;
+    transform: translate(100%, 0);
+}
+
+.engrenagem{
+    position: absolute; /* Define a posição absoluta */
+    top: 0px; /* Distância do topo em pixels */
+    right: 5%; /* Distância da direita em pixels */
+}
+
+.engrenagem img {
+    width: 40px; /* Largura desejada para a imagem */
+    height: auto; /* Altura desejada para a imagem */
+    float: right; /* Alinha a imagem à direita */
+    margin-top: 10px; /* Ajusta a margem superior em pixels */
+}
+
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 12px;
+        height: 12px;
+    }
+
+    h1 {
+        font-size: 18px;
+        margin-bottom: 18px;
+        color: #0B4619;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 10px 10px;
+        background-color: #0B4619;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        max-width: 100%;
+    }
+
+    th,
+    td {
+        padding: 12px;
+        font-size: 12px;
+        line-height: 1;
+        max-width: 100%;
+    }
+
+    td {
+        font-size: 12px;
+        padding: 6px;
+    }
+    #resultado{
+        max-width: 100%;
+    }
+}
